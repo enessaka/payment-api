@@ -12,7 +12,7 @@ build:
     - mvn clean install
 
 buildImages:
-  stage: buildImage
+  stage: buildImages
   script:
     - mvn spring-boot:build-image
     - cd ..
