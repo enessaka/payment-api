@@ -10,6 +10,7 @@ build:
   stage: build
   script:
     - mvn clean install
+  allow_failure: true
 
 buildImages:
   stage: buildImages
