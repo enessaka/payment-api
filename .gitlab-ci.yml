@@ -1,0 +1,21 @@
+image: maven:3.6-jdk-11
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+test:
+  script:
+    - mvn clean install
+    - cd api
+    - mvn spring-boot:build-image
+    - cd ..
+    - cd booking-system
+    - mvn spring-boot:build-image
+    - cd ..
+    - cd api-test
+    - mvn clean verify
+  artifacts:
+    paths:
+      - target/site
