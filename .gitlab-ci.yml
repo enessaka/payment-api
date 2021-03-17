@@ -1,24 +1,53 @@
 image: maven:3.6-jdk-11
 
-cache:
-  paths:
-    - .m2/repository/
-    - target/
+stages:
+  - build
+  - buildImages
+  - dockerCompose
+  - test
 
-test:
+build:
+  stage: build
   script:
     - mvn clean install
-    - cd api
+
+buildImages:
+  stage: buildImage
+  script:
     - mvn spring-boot:build-image
     - cd ..
     - cd booking-system
     - mvn spring-boot:build-image
-    - cd ..
+
+dockerCompose:
+  stage: dockerCompose
+  script:
     - cd misc/docker
     - docker-compose up -d
-    - cd ../..
+
+test:
+  stage: test
+  script:
     - cd api-test
     - mvn clean verify
   artifacts:
     paths:
       - target/site
+
+#test:
+#  script:
+#    - mvn clean install
+#    - cd api
+#    - mvn spring-boot:build-image
+#    - cd ..
+#    - cd booking-system
+#    - mvn spring-boot:build-image
+#    - cd ..
+#    - cd misc/docker
+#    - docker-compose up -d
+#    - cd ../..
+#    - cd api-test
+#    - mvn clean verify
+#  artifacts:
+#    paths:
+#      - target/site
