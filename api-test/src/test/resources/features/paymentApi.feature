@@ -1,6 +1,19 @@
 @paymentApi
 Feature: Payment API
 
+  # bug - balance needs to be updated after a success booking confirmation
+  # api/booking/ResponseListener needs to update debtor's balance as well as status update
+  @successPayment
+  Scenario: Success payment
+    When I create a new payment request
+    Then I should receive status code 'OK'
+
+  @retryTransaction
+  Scenario: Do payment with an existing transaction id
+    Given payment is created
+    When I try create payment with the same transaction id
+    Then I should receive status code 'BAD_REQUEST' with response contains "Transaction is already performed" value
+
   # bug - There is a typo on the error message: "doesnt't"
   @nonExistingIban
   Scenario Outline: Try to create payment with an invalid iban
@@ -35,9 +48,21 @@ Feature: Payment API
     Then I should receive status code 'BAD_REQUEST'
     And the response should contain "Transaction with amount lower than 1000000 can be executed via api" value
 
-  @overTransactionLimit
-  Scenario: Validate payment transaction limit
+  @overBalance
+  Scenario: Validate not enough balance
     When I try to create a payment with the following parameters:
       | amount | 987654 |
     Then I should receive status code 'BAD_REQUEST'
     And the response should contain "Debtor doesn't have enough balance" value
+
+  @inactiveAccount
+  Scenario Outline: Try to create a new payment from/to inactive account
+    When I try to create a payment with the following parameters:
+      | debtorIban   | <debtorIban>   |
+      | creditorIban | <creditorIban> |
+    Then I should receive status code 'BAD_REQUEST' with response contains "<errorMessage>" value
+
+    Examples:
+      | debtorIban        | creditorIban      | errorMessage                   |
+      | NL000000000000004 | NL000000000000001 | Debtor account is not active   |
+      | NL000000000000001 | NL000000000000004 | Creditor account is not active |

@@ -6,7 +6,6 @@ import static com.payee.test.utils.restassured.Requests.then;
 import static org.hamcrest.Matchers.*;
 
 public class ResponseAssertion {
-    private static final String RESP_MESSAGE_SHOULD_CONTAIN = "Response message does not contain: ";
 
     @Step("Check whether status code is as {0}")
     public void assertStatusCode(int statusCode) {
