@@ -4,6 +4,21 @@ Serenity BDD is a library that makes it easier to write high-quality automated a
 and living documentation features. It has strong support for both web testing with Selenium, and API testing using
 RestAssured.
 
+### Findings
+
+#### Issues
+
+1. Although service.execute tries to update payments, the transaction was not able to commit. In order to fix that issue
+   @Transactional annotation added to PaymentService
+2. ResponseListener updates only payment status on payments table thus accounts' balances are not getting updated after
+   success booking
+3. There is a typo on the error message of non-existing account response
+4. When the payment request is missing a field, api throws exception and returns `Internal Server Error` to the
+   requester. Instead of that flow, a proper error code (BAD_REQUEST)/message (XXX must not be null) needs to be
+   returned to the requester.
+
+Additionally, in docker-compose.yml, default ports added to payment-db service in order to query database
+
 ### Prerequisites
 
 `JDK 11`

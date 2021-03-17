@@ -2,7 +2,7 @@
 Feature: Payment API
 
   # bug - balance needs to be updated after a success booking confirmation
-  # api/booking/ResponseListener needs to update debtor's balance as well as status update
+  # api/booking/ResponseListener needs to update accounts' balances as well as status update
   @successPayment
   Scenario: Success payment
     When I create a new payment request
