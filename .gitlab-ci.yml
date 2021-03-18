@@ -37,6 +37,8 @@ image: maven:3.6-jdk-11
 #      - target/site
 
 test:
+  services:
+    - docker
   script:
     - apt-get update
     - apt-get install \
