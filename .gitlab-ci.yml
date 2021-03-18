@@ -40,10 +40,9 @@ test:
   #  services:
   #    - twalter/maven-docker
   script:
-    - apt-get install sudo -y
     - mvn clean install -Dmaven.test.skip=true
     - cd api
-    - sudo mvn spring-boot:build-image
+    - su && mvn spring-boot:build-image
     - cd ..
     - cd booking-system
     - mvn spring-boot:build-image
