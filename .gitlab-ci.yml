@@ -38,7 +38,13 @@ image: maven:3.6-jdk-11
 
 test:
   script:
-    - apt-get install docker-ce docker-ce-cli containerd.io
+    - apt-get update
+    - apt-get install \
+      apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg \
+      lsb-release
     - docker --version
     - mvn clean install -Dmaven.test.skip=true
     - cd api
