@@ -48,7 +48,7 @@ Feature: Payment API
     Then I should receive status code 'BAD_REQUEST'
     And the response should contain "Transaction with amount lower than 1000000 can be executed via api" value
 
-  @overBalance @enes
+  @overBalance
   Scenario: Validate not enough balance
     When I try to create a payment with the following parameters:
       | amount | 987654 |

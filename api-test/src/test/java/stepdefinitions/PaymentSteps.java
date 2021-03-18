@@ -6,7 +6,6 @@ import cucumber.api.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
-import org.assertj.core.api.SoftAssertions;
 import servicesimpl.PaymentApi;
 import servicesimpl.ResponseAssertion;
 
@@ -20,20 +19,12 @@ public class PaymentSteps {
     public static final String DEFAULT_DEBTOR_IBAN = "NL000000000000001";
     public static final String DEFAULT_AMOUNT = "1";
     public static final String TXN_ID = "txnId";
-
-    private static final SoftAssertions softAssert = new SoftAssertions();
-
+    
     @Steps
     PaymentApi paymentApi;
 
     @Steps
     ResponseAssertion responseAssertion;
-
-    //    @Autowired
-    //    PaymentRepository paymentRepository;
-    //
-    //    @Autowired
-    //    AccountRepository accountRepository;
 
     @Given("payment is created")
     public void ensurePaymentCreated() {
@@ -67,19 +58,6 @@ public class PaymentSteps {
 
         paymentApi.createPayment(payload);
     }
-    //
-    //    @When("I try to request")
-    //    public void blabla() {
-    //        PaymentRequest paymentRequest = paymentApi.generateDefaultPaymentRequest();
-    //
-    //        try {
-    //            AccountEntity debtor = accountRepository.findById(DEFAULT_DEBTOR_IBAN).orElseThrow(() -> new ValidationException("Debtor doesnt't exist."));
-    //            paymentRequest.setAmount(debtor.getBalance().add(BigDecimal.ONE));
-    //        } catch (ValidationException e) {
-    //            e.printStackTrace();
-    //        }
-    //        paymentApi.createPayment(paymentRequest);
-    //    }
 
     @When("I try to create a new payment without '{word}' parameter")
     public void createPaymentWithoutMandatoryField(String field) {

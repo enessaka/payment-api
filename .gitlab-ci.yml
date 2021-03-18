@@ -1,4 +1,4 @@
-image: maven:3.6-jdk-11
+image: docker:latest
 #
 #stages:
 #  - build
@@ -35,6 +35,7 @@ image: maven:3.6-jdk-11
 #      - target/site
 
 test:
+  image: maven:3.6-jdk-11
   script:
     - mvn clean install -Dmaven.test.skip=true
     - cd api
