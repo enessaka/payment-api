@@ -1,0 +1,12 @@
+[
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/callback"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": "thanks dear"
+    }
+  }
+]
