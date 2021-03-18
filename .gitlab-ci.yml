@@ -1,5 +1,5 @@
-image: twalter/maven-docker
-#image: maven:3.6-jdk-11
+#image: twalter/maven-docker
+image: maven:3.6-jdk-11
 
 #
 #stages:
@@ -38,7 +38,7 @@ image: twalter/maven-docker
 
 test:
   services:
-    - jdk-11
+    - twalter/maven-docker
   script:
     - mvn clean install -Dmaven.test.skip=true
     - cd api
