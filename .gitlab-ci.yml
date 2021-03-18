@@ -1,5 +1,5 @@
-image: twalter/maven-docker
-#image: maven:3.6-jdk-11
+#image: twalter/maven-docker
+image: maven:3.6-jdk-11
 
 #
 #stages:
