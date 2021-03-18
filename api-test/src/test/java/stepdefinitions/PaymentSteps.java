@@ -1,15 +1,12 @@
 package stepdefinitions;
 
 import com.payee.test.models.PaymentRequest;
-import com.payee.test.utils.dao.AccountRepository;
-import com.payee.test.utils.dao.PaymentRepository;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.SoftAssertions;
-import org.springframework.beans.factory.annotation.Autowired;
 import servicesimpl.PaymentApi;
 import servicesimpl.ResponseAssertion;
 
@@ -32,11 +29,11 @@ public class PaymentSteps {
     @Steps
     ResponseAssertion responseAssertion;
 
-    @Autowired
-    PaymentRepository paymentRepository;
-
-    @Autowired
-    AccountRepository accountRepository;
+    //    @Autowired
+    //    PaymentRepository paymentRepository;
+    //
+    //    @Autowired
+    //    AccountRepository accountRepository;
 
     @Given("payment is created")
     public void ensurePaymentCreated() {
@@ -70,7 +67,7 @@ public class PaymentSteps {
 
         paymentApi.createPayment(payload);
     }
-
+    //
     //    @When("I try to request")
     //    public void blabla() {
     //        PaymentRequest paymentRequest = paymentApi.generateDefaultPaymentRequest();
