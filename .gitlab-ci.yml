@@ -42,7 +42,8 @@ test:
   script:
     - mvn clean install -Dmaven.test.skip=true
     - cd api
-    - su && mvn spring-boot:build-image
+    - mvn clean install
+    - mvn spring-boot:build-image
     - cd ..
     - cd booking-system
     - mvn spring-boot:build-image
